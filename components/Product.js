@@ -16,11 +16,11 @@ app.component('product-display', {
 
             <div class="product-image">
                 <!-- show of product -->
-                <img v-bind:src="image" :class="[quantity < 1 ? 'out-of-stock-img' : '']">
+                <img :src="image" :class="[quantity < 1 ? 'out-of-stock-img' : '']">
                 
                 <!-- show a link to other products if there is no stock quantity -->
                 <p v-show="quantity < 1" class="linkBrand">
-                Viste others product of <a v-bind:href="url">{{brand}}</a>
+                Viste others product of <a :href="url">{{brand}}</a>
                 </p>
             </div>
 
@@ -44,7 +44,7 @@ app.component('product-display', {
                 <details-display :details="details"></details-display>
 
                 <!-- show colors options and sizes -->
-                <div v-for="(variant, index) in variants" :key="variant.id" @click="updateVariant(index)" class="color-circle" :style="{backgroundColor: variant.color}">
+                <div v-for="(variant, index) in variants" :key="variant.id" @mouseover="updateVariant(index)" class="color-circle" :style="{backgroundColor: variant.color}">
                 </div>
 
                 <!-- show sizes avalibles -->
@@ -54,7 +54,7 @@ app.component('product-display', {
 
                 <!-- show botton add and remove item -->
                 <button class="button" @click="addToCart" :class="[quantity < 1 ? 'disabledButton' : '']" :disabled="quantity < 1">Add to card</button>
-                <button class="button" @click="removeItem" :class="[cart.length < 1 ? 'disabledButton' : '']" :disabled="cart.length < 1" v-show="cart.length > 0">Remove item</button>
+                <button class="button" @click="removeItem" :class="[cart.length < 1 ? 'disabledButton' : '']" :disabled="cart.length < 1" v-show="cart.length > 0 ">Remove item</button>
                 
             </div>
             
@@ -75,6 +75,7 @@ app.component('product-display', {
             variants: [
                 {id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 10, sizes: ["S", "M", "L"], shippingPrice: 2.99},
                 {id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 5, sizes: ["XS", "M", "XL"], shippingPrice: 2.98},
+                {id: 2236, color: 'red', image: './assets/images/socks_blue.jpg', quantity: 0, sizes: ["M", "XL"], shippingPrice: 2.97},
             ],
             showRemoveBotton : false,
             reviews: []

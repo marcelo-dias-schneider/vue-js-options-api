@@ -15,7 +15,8 @@
       <div class="nav-bar"></div>
       
       <!-- show the card -->
-      <div class="cart">Cart({{ cart.length }})</div>
+      <!-- <div class="cart">Cart({{ cart.length }})</div> -->
+      <cart :cart="cart"></cart>
 
       <product-display :cart="cart" :premium="premium" @update-card="updateCard"></product-display>
     </div>
@@ -24,6 +25,7 @@
     <script src="./main.js"></script>
     
     <!-- Import Components -->
+    <script src="./components/Cart.js"></script>
     <script src="./components/Product.js"></script>
     <script src="./components/Details.js"></script>
     <script src="./components/ReviewFrom.js"></script>
