@@ -6,70 +6,29 @@
     <!-- Import Styles -->
     <link rel="stylesheet" href="./assets/styles.css" />
     <!-- Import Vue.js -->
-    <!-- <script src="https://unpkg.com/vue@3.0.0-beta.12/dist/vue.global.js"></script> -->
+    <script src="https://unpkg.com/vue@3.0.0-beta.12/dist/vue.global.js"></script>
     <!-- Import Vue.js latest version -->
-    <script src="https://unpkg.com/vue@next"></script>
+    <!-- <script src="https://unpkg.com/vue@next"></script> -->
   </head>
   <body>
     <div id="app">
       <div class="nav-bar"></div>
       
       <!-- show the card -->
-      <div class="cart">Cart({{ cart }})</div>
+      <div class="cart">Cart({{ cart.length }})</div>
 
-      <div class="product-display">
-        <div class="product-container">
-
-          <div class="product-image">
-            <!-- show of product -->
-            <img v-bind:src="image" :class="[quantity < 1 ? 'out-of-stock-img' : '']">
-            
-            <!-- show a link to other products if there is no stock quantity -->
-            <p v-show="quantity < 1" class="linkBrand">
-              Viste others product of <a v-bind:href="url">{{brand}}</a>
-            </p>
-          </div>
-
-          <div class="product-info">
-            <!-- show title of product -->
-            <h1>{{ title }}</h1>
-
-            <!-- show description of product -->
-            <p>{{ descriptionProduct }}</p>
-
-            <!-- show available quantity -->
-            <p v-if="quantity >= 10">{{ quantity }} units in stock</p>
-            <P v-else-if="quantity < 10 && quantity > 0">Run up, {{ quantity }} units in stock</P>
-            <p v-else>Out of stock</p>
-
-            <!-- show details -->
-            <ul>
-              <li v-for="detail in details">{{ detail }}</li>
-            </ul>
-
-            <!-- show colors options and sizes -->
-            <div class="inline">
-              <div v-for="(variant, index) in variants" :key="variant.id" @click="updateVariant(index)" class="color-circle" :style="{backgroundColor: variant.color}">
-              </div>
-            </div>
-
-            <!-- show sizes avalibles -->
-            <ul>
-              <li class="sizes" v-for="size in sizes">{{ size }}</li>
-            </ul>
-
-            <!-- show botton add and remove item -->
-            <button class="button" @click="addToCart" :class="[quantity < 1 ? 'disabledButton' : '']" :disabled="quantity < 1">Add to card</button>
-            <button class="button" @click="removeItem" :class="[cart < 1 ? 'disabledButton' : '']" :disabled="cart < 1" v-show="cart > 0">Remove item</button>
-            
-          </div>
-
-        </div>
-      </div>
+      <product-display :cart="cart" :premium="premium" @update-card="updateCard"></product-display>
     </div>
 
     <!-- Import App -->
     <script src="./main.js"></script>
+    
+    <!-- Import Components -->
+    <script src="./components/Product.js"></script>
+    <script src="./components/Details.js"></script>
+    <script src="./components/ReviewFrom.js"></script>
+    <script src="./components/ReviewList.js"></script>
+    
     <!-- Mount App -->
     <script>
       const mountedApp = app.mount('#app')
