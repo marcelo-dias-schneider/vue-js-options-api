@@ -35,11 +35,12 @@ app.component('product-display', {
                 <p>Shipping: {{ shipping }}</p>
                 
                 <!-- show available quantity -->
-                <!-- 
-                <p v-if="quantity >= 10">{{ quantity }} units in stock</p>
-                <P v-else-if="quantity < 10 && quantity > 0">Run up, {{ quantity }} units in stock</P>
-                <p v-else>Out of stock</p>-->
+                <p v-if="quantAvalible >= 10">{{ quantAvalible }} units in stock</p>
+                <p v-else-if="quantAvalible > 1">Run up, only {{ quantAvalible }} units in stock</p>
+                <p v-else-if="quantAvalible > 0">It overing, {{ quantAvalible }} unit in stock</p>
+                <p v-else>Out of stock</p>
 
+                
                 <!-- show details -->
                 <details-display :details="details"></details-display>
 
@@ -75,7 +76,7 @@ app.component('product-display', {
             variants: [
                 {id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 10, sizes: ["S", "M", "L"], shippingPrice: 2.99},
                 {id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 5, sizes: ["XS", "M", "XL"], shippingPrice: 2.98},
-                {id: 2236, color: 'red', image: './assets/images/socks_blue.jpg', quantity: 0, sizes: ["M", "XL"], shippingPrice: 2.97},
+                {id: 2236, color: 'red', image: './assets/images/socks_blue.jpg', quantity: 1, sizes: ["M", "XL"], shippingPrice: 2.97},
             ],
             showRemoveBotton : false,
             reviews: []
@@ -100,7 +101,6 @@ app.component('product-display', {
         },
         addReview(review){
             this.reviews.push(review)
-            console.log(this.reviews)
         }
     },
     computed: {
@@ -121,6 +121,9 @@ app.component('product-display', {
         },
         shipping(){
             return this.premium ? 'Free' : '$' + this.variants[this.selectedVariante].shippingPrice
+        },
+        quantAvalible(){
+            return this.variants[this.selectedVariante].quantity
         }
     }
 }) 
