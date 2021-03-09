@@ -22,9 +22,9 @@ body {
 }
 
 .cart {
-  position: absolute;
-  margin: 0 50px;
-  /* float: left; */
+  position: fixed;
+  margin-top: -80px;
+  margin-left: 5%;
   border: 1px solid #d8d8d8;
   padding: 10px 30px;
   background-color: white;

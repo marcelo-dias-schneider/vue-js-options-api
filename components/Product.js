@@ -4,6 +4,10 @@ app.component('product-display', {
             type: Array,
             required: true
         },
+        variants: {
+            type: Array,
+            required: true
+        },
         premium:{
             type: Boolean,
             required: true
@@ -55,7 +59,7 @@ app.component('product-display', {
 
                 <!-- show botton add and remove item -->
                 <button class="button" @click="addToCart" :class="[quantity < 1 ? 'disabledButton' : '']" :disabled="quantity < 1">Add to card</button>
-                <button class="button" @click="removeItem" :class="[cart.length < 1 ? 'disabledButton' : '']" :disabled="cart.length < 1" v-show="cart.length > 0 ">Remove item</button>
+                <button class="button" @click="removeItem" :class="[showRemoveBotton ? '' : 'disabledButton']" :disabled="!showRemoveBotton" v-show="showRemoveBotton">Remove item</button>
                 
             </div>
             
@@ -73,11 +77,6 @@ app.component('product-display', {
             link: 'link',
             url: '#',
             details: ['50% cotton', '30% wool', '20% polyester'],
-            variants: [
-                {id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 10, sizes: ["S", "M", "L"], shippingPrice: 2.99},
-                {id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 5, sizes: ["XS", "M", "XL"], shippingPrice: 2.98},
-                {id: 2236, color: 'red', image: './assets/images/socks_blue.jpg', quantity: 1, sizes: ["M", "XL"], shippingPrice: 2.97},
-            ],
             showRemoveBotton : false,
             reviews: []
         }
@@ -95,9 +94,17 @@ app.component('product-display', {
         },
         updateVariant(index){
             this.selectedVariante = index
+            this.styleBottons()
         },
         styleBottons(){
-            this.cart > 0 ? this.showRemoveBotton = true : this.showRemoveBotton = false
+            let uniqueId = this.cart.filter(onlyUnique)
+            let i = 0
+            uniqueId.forEach(id => {
+                if(this.variants[this.selectedVariante].id == id){
+                    i ++
+                }
+            })
+            i > 0 ? this.showRemoveBotton = true : this.showRemoveBotton = false
         },
         addReview(review){
             this.reviews.push(review)

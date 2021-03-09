@@ -3,6 +3,10 @@ app.component('cart', {
         cart:{
             type: Array,
             required: true
+        },
+        variants: {
+            type: Array,
+            required: true
         }
     },
     template:
@@ -17,15 +21,14 @@ app.component('cart', {
             uniqueId.forEach(id => {
                 let quant = 0;
                 for(let i = 0; i < this.cart.length; ++i){
-                    if(this.cart[i] == id)
-                    quant++;
+                    if(this.cart[i] == id){
+                        quant++
+                    }
                 }
-                produtosOnCart.push({'id':id, 'quant':quant})  
+                position = this.variants.map(function(e) { return e.id; }).indexOf(id);
+                produtosOnCart.push({'id':id, 'color':this.variants[position].color , 'quant':quant})  
             })
             return produtosOnCart
-        },
-        carts(){
-            return this.cart
         }
     }
 })

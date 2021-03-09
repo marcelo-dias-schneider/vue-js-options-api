@@ -15,10 +15,9 @@
       <div class="nav-bar"></div>
       
       <!-- show the card -->
-      <!-- <div class="cart">Cart({{ cart.length }})</div> -->
-      <cart :cart="cart"></cart>
+      <cart :cart="cart" :variants='variants'></cart>
 
-      <product-display :cart="cart" :premium="premium" @update-card="updateCard"></product-display>
+      <product-display :cart="cart" :variants='variants' :premium="premium" @update-card="updateCard"></product-display>
     </div>
 
     <!-- Import App -->
