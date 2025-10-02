@@ -33,5 +33,9 @@ This project is a hands-on learning exercise for Vue.js, focusing on the Options
 - Build reusable components
 - Manage state and UI updates
 
+---
+[View it live!!!](https://marcelo-dias-schneider.github.io/vue-js-options-api/)
+---
+
 ## Credits
-Created by marcelo-dias-schneider as a Vue.js learning project.
+Developed by [Marcelo Dias Schneider](https://marceloschneider.dev.br/).
